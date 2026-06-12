@@ -24,6 +24,10 @@ target("sandbox")
     add_files("sandbox/**.cpp")
     add_deps("crumb_engine")
 
+     after_build(function (target)
+        os.cp("C:/third_party/sdl3/bin/SDL3.dll", target:targetdir())
+    end)
+
 target("vendor")
     set_kind("moduleonly")
     add_files("vendor/**.cppm")
