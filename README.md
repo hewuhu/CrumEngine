@@ -1,6 +1,6 @@
 # CrumEngine
 
-一个 C++23 模块构建的游戏引擎，采用 Piccolo 双 tick 架构。
+一个 C++23 模块构建的游戏引擎
 
 感谢他们提供的免费教程：
 [The Cherno](https://www.youtube.com/@TheCherno)
@@ -46,80 +46,6 @@ xmake build sandbox
 
 ```bash
 xmake run sandbox
-```
-
----
-
-## 项目结构
-
-```
-CrumEngine/
-├── engine/source/
-│   ├── entry.cpp                          # main() 入口
-│   ├── crumb.cppm                         # 顶层模块 crumb (聚合所有子系统)
-│   │
-│   ├── core/
-│   │   ├── core.cppm                      # crumb.core — 聚合 log + time
-│   │   ├── log/log.cppm                   # crumb.core:log — spdlog 封装
-│   │   └── time/time.cppm                 # crumb.core:time — 高精度计时 + FPS
-│   │       time/time.cpp
-│   │
-│   ├── platform/
-│   │   ├── platform.cppm                  # crumb.platform — 聚合 events, window, input
-│   │   │
-│   │   ├── events/
-│   │   │   ├── events_mod.cppm            # crumb.platform.events — 事件模块聚合
-│   │   │   ├── event.cppm                 #   基类 Event, EventImpl<>, EventDispatcher
-│   │   │   ├── key_codes.cppm             #   Key:: 命名空间 — 键盘码 (HID 规范)
-│   │   │   ├── mouse_codes.cppm           #   Mouse:: 命名空间 — 鼠标按钮 (对齐 SDL)
-│   │   │   ├── key_event.cppm             #   KeyPressed, KeyReleased, KeyTyped
-│   │   │   ├── mouse_event.cppm           #   MouseButtonPressed, MouseMoved, MouseScrolled …
-│   │   │   └── application_event.cppm     #   WindowResize, WindowClose, WindowFocus …
-│   │   │
-│   │   ├── window/
-│   │   │   ├── window.cppm                #   Window 类 — SDL3 窗口封装
-│   │   │   └── window.cpp                 #   PollEvents — SDL 事件 → 引擎事件 桥接
-│   │   │
-│   │   └── input/
-│   │       ├── input.cppm                 #   Input 静态类 — 键盘/鼠标 状态查询
-│   │       └── input.cpp                  #   双缓冲 按下/释放 边沿检测
-│   │
-│   └── runtime/
-│       ├── runtime.cppm                   # crumb.runtime — 聚合 application
-│       ├── application.cppm               #   Application 类 — 引擎主循环
-│       └── application.cpp                #   双 tick: OnInput → OnUpdate → OnRender
-│
-├── vendor/                                # 第三方库 C++20 模块封装
-│   ├── sdl.cppm
-│   ├── glm.cppm
-│   ├── vulkan/
-│   └── imgui/
-│
-├── sandbox/
-│   └── sandbox_app.cpp                    # 测试 / 示例应用
-│
-└── xmake.lua                              # 构建配置
-```
-
-## 模块层次
-
-```
-crumb                               (crumb.cppm)
-├── crumb.core                      (core/core.cppm)
-│   ├── crumb.core:log              (core/log/log.cppm)
-│   └── crumb.core:time             (core/time/time.cppm)
-├── crumb.platform                  (platform/platform.cppm)
-│   ├── crumb.platform.events       (platform/events/events_mod.cppm)
-│   │   ├── :event
-│   │   ├── :key_codes
-│   │   ├── :mouse_codes
-│   │   ├── :key_event
-│   │   ├── :mouse_event
-│   │   └── :application_event
-│   ├── crumb.platform.window       (platform/window/window.cppm)
-│   └── crumb.platform.input        (platform/input/input.cppm)
-└── crumb.runtime                   (runtime/runtime.cppm)
-    └── crumb.runtime:application  (runtime/application.cppm)
 ```
 
 ---

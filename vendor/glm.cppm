@@ -40,12 +40,29 @@ using glm::dot;
 using glm::cross;
 using glm::length;
 using glm::distance;
+using glm::reflect;
 
 using glm::inverse;
 using glm::transpose;
+using glm::determinant;
 
 // gtc/type_ptr
 using glm::value_ptr;
+using glm::make_mat3;
+using glm::make_mat4;
+
+// gtc/quaternion
+using glm::quat_cast;
+using glm::mat3_cast;
+using glm::mat4_cast;
+using glm::angleAxis;
+using glm::angle;
+using glm::axis;
+using glm::quatLookAt;
+using glm::eulerAngles;
+using glm::slerp;
+using glm::mix;
+using glm::conjugate;
 
 // ── 运算符 ──
 using glm::operator==;

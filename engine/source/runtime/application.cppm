@@ -1,7 +1,9 @@
 export module crumb.runtime:application;
 
+import :engine_context;
 import crumb.core;
 import crumb.platform;
+import crumb.resource;
 import std;
 
 export namespace Crumb {
@@ -14,7 +16,7 @@ public:
     Application(const Application&) = delete;
     Application& operator=(const Application&) = delete;
 
-    virtual void OnInit()    {}
+    virtual void OnInit() {}
     virtual void OnInput(float deltaTime) {}
     virtual void OnUpdate(float deltaTime) {}
     virtual void OnRender(float deltaTime) {}
@@ -29,10 +31,16 @@ public:
     Time&   GetTime()   { return m_Time; }
     float   GetFPS() const;
 
+    ConfigManager& GetConfig() { return m_config; }
+    AssetManager&  GetAssets() { return m_assets; }
+
 protected:
     std::unique_ptr<Window> m_Window;
-    Time  m_Time;
-    bool  m_Running = true;
+    EngineContext m_engine;
+    ConfigManager m_config;
+    AssetManager  m_assets;
+    Time   m_Time;
+    bool   m_Running = true;
 };
 
 } // namespace Crumb
